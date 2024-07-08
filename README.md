@@ -1,7 +1,7 @@
 # covid-vaccine-appointment-api
 Este repositório contém o backend do sistema de agendamento de vacina para COVID-19. Desenvolvido em .NET, fornece a API para gerenciar os agendamentos, incluindo criação, consulta e atualização de status das reservas.
 
-_This repository contains the frontend of a COVID-19 vaccine appointment system. Developed in .NET, it allows users to schedule their vaccines, view existing appointments, and receive notifications about their bookings._
+_This repository contains the backend of a COVID-19 vaccine appointment system. Developed in .NET, it allows users to schedule their vaccines, view existing appointments, and receive notifications about their bookings._
 
 #### Descrição:
 
