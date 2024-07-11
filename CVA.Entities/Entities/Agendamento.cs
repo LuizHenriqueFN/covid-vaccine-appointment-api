@@ -8,10 +8,10 @@ namespace CVA.Entity.Entities
 
         public TimeOnly HorAgendamento { get; set; }
 
-        public string DscStatus { get; set; }
+        public string DscStatus { get; set; } = string.Empty;
 
         public DateTime DatCriacao { get; set; }
 
-        public Paciente Paciente { get; set; }
+        public Paciente Paciente { get; set; } = new Paciente();
     }
 }
