@@ -5,7 +5,11 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.api", "CVA.api\CVA.api.csproj", "{27451DC5-4814-4B25-9654-2F455D8E4129}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVA.Entity", "CVA.Entities\CVA.Entity.csproj", "{E3EADFCC-FDCE-4D52-92DD-A74A61C6AC09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.Entity", "CVA.Entities\CVA.Entity.csproj", "{E3EADFCC-FDCE-4D52-92DD-A74A61C6AC09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.Repository", "CVA.Repository\CVA.Repository.csproj", "{61E689D9-25C8-46A9-B910-B9186174C6BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVA.Repository.Interface", "CVA.Repository.Interface\CVA.Repository.Interface.csproj", "{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{E3EADFCC-FDCE-4D52-92DD-A74A61C6AC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3EADFCC-FDCE-4D52-92DD-A74A61C6AC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3EADFCC-FDCE-4D52-92DD-A74A61C6AC09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E689D9-25C8-46A9-B910-B9186174C6BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E689D9-25C8-46A9-B910-B9186174C6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E689D9-25C8-46A9-B910-B9186174C6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E689D9-25C8-46A9-B910-B9186174C6BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
