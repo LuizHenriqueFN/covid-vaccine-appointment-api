@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,11 +8,20 @@
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CVA.Repository.Interface\CVA.Repository.Interface.csproj" />
+    <ProjectReference Include="..\CVA.Repository\CVA.Repository.csproj" />
+    <ProjectReference Include="..\CVA.Service.Interface\CVA.Service.Interface.csproj" />
+    <ProjectReference Include="..\CVA.Service\CVA.Service.csproj" />
+    <ProjectReference Include="..\CVA.Validator\CVA.Validator.csproj" />
   </ItemGroup>
 
 </Project>

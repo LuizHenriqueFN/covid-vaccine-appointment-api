@@ -1,6 +1,6 @@
 ﻿namespace CVA.Entity.Filters
 {
-    public class AppoitmentFilter
+    public class AppointmentFilter
     {
         public int? Id { get; set; }
 
