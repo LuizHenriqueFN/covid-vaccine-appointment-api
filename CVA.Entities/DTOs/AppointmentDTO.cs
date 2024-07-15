@@ -2,6 +2,8 @@
 {
     public class AppointmentDTO
     {
+        public int Id {  get; set; }
+
         public DateOnly AppointmentDate { get; set; }
 
         public TimeOnly AppointmentTime { get; set; }

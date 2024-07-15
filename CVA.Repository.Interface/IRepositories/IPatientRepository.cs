@@ -6,7 +6,7 @@ namespace CVA.Repository.Interface.IRepositories
 {
     public interface IPatientRepository : IBaseRepository<Patient>
     {
-        Task<PatientDTO?> GetPatientById(int patientId, bool asNoTracking = true);
+        Task<Patient?> GetPatientById(int patientId, bool asNoTracking = true);
 
         Task<List<PatientDTO>> GetAllPatients(bool asNoTracking = true);
 

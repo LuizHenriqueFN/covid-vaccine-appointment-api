@@ -11,26 +11,14 @@ namespace CVA.Repository.Repositories
     {
         public PatientRepository(Context context) : base(context) { }
 
-        public Task<PatientDTO?> GetPatientById(int patientId, bool asNoTracking = true)
+        public Task<Patient?> GetPatientById(int patientId, bool asNoTracking = true)
         {
-            var query = _context.Patient
-                .Where(p => p.Id == patientId)
-                .Select(p => new PatientDTO
-                {
-                    Name = p.Name,
-                    BirthDate = p.BirthDate,
-                    AppointmentDTOs = p.Appointments.Select(a => new AppointmentDTO
-                    {
-                        AppointmentDate = a.AppointmentDate,
-                        AppointmentTime = a.AppointmentTime,
-                        StatusDescription = a.StatusDescription
-                    }).ToList()
-                });
+            var query = EntitySet.AsQueryable();
 
             if (asNoTracking)
                 query = query.AsNoTracking();
 
-            return query.FirstOrDefaultAsync();
+            return query.FirstOrDefaultAsync(p => p.Id == patientId);
         }
 
         public Task<List<PatientDTO>> GetAllPatients(bool asNoTracking = true)

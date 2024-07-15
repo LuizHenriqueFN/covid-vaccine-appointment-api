@@ -1,14 +1,25 @@
-﻿using Microsoft.OpenApi.Any;
+﻿using CVA.api.Configuration;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
 namespace CVA.api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; set; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDependencyInjectionConfiguration(Configuration);
+            services.AddDatabaseConfiguration(Configuration);
+            services.AddFluentConfiguration();
 
             services.AddSwaggerGen(c =>
             {

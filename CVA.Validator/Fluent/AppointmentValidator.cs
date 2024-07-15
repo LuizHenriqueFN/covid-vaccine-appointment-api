@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace CVA.Validator.Fluent
 {
-    public class AppointmentValodator : AbstractValidator<AppointmentRegistrationModel>
+    public class AppointmentValidator : AbstractValidator<AppointmentRegistrationModel>
     {
-        public AppointmentValodator()
+        public AppointmentValidator()
         {
             RuleFor(a => a.AppointmentDate)
                 .NotEmpty().WithMessage(string.Format(BusinessMessages.FieldRequired, "Appointment Date"))

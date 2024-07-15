@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CVA.Repository.Repositories
 {
-    public class AppointmentRepository : BaseRepository<Appointment>, IAppoitmentRepository
+    public class AppointmentRepository : BaseRepository<Appointment>, IAppointmentRepository
     {
         public AppointmentRepository(Context context) : base(context) { }
 
@@ -33,30 +33,17 @@ namespace CVA.Repository.Repositories
             return query.ToListAsync();
         }
 
-        public Task<AppointmentDTO?> GetAppointmentById(int appointmentId, bool asNoTracking = true)
+        public Task<Appointment?> GetAppointmentById(int appointmentId, bool asNoTracking = true)
         {
-            var query = _context.Appointment
-                        .Include(a => a.Patient)
-                        .Where(a => a.Id == appointmentId)
-                        .Select(a => new AppointmentDTO
-                        {
-                            AppointmentDate = a.AppointmentDate,
-                            AppointmentTime = a.AppointmentTime,
-                            StatusDescription = a.StatusDescription,
-                            Patient = new PatientDTO
-                            {
-                                Name = a.Patient.Name,
-                                BirthDate = a.Patient.BirthDate
-                            }
-                        });
+            var query = EntitySet.AsQueryable();
 
             if (asNoTracking)
                 query = query.AsNoTracking();
 
-            return query.FirstOrDefaultAsync();
+            return query.FirstOrDefaultAsync(a => a.Id == appointmentId);
         }
 
-        public Task<List<AppointmentDTO>> GetAppointmentsByFilter(AppoitmentFilter filter, bool asNoTracking = true)
+        public Task<List<AppointmentDTO>> GetAppointmentsByFilter(AppointmentFilter filter, bool asNoTracking = true)
         {
             var query = _context.Appointment.AsQueryable();
 

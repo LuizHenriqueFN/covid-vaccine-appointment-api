@@ -9,7 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.Entity", "CVA.Entities\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.Repository", "CVA.Repository\CVA.Repository.csproj", "{61E689D9-25C8-46A9-B910-B9186174C6BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVA.Repository.Interface", "CVA.Repository.Interface\CVA.Repository.Interface.csproj", "{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.Repository.Interface", "CVA.Repository.Interface\CVA.Repository.Interface.csproj", "{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.Service", "CVA.Service\CVA.Service.csproj", "{472BA049-FEC1-4268-8C6A-4979D80FED8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CVA.Service.Interface", "CVA.Service.Interface\CVA.Service.Interface.csproj", "{1245A443-C2D8-42CA-954F-CD82481303F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVA.Validator", "CVA.Validator\CVA.Validator.csproj", "{3F6E90C4-A7FA-4941-BB15-4A20731039AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVA.Utils", "CVA.Utils\CVA.Utils.csproj", "{6047BD11-239E-4326-8BA0-651EC8E36B7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +41,22 @@ Global
 		{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02CBDA0B-14CD-462C-943D-9CFF79A0CEA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{472BA049-FEC1-4268-8C6A-4979D80FED8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{472BA049-FEC1-4268-8C6A-4979D80FED8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{472BA049-FEC1-4268-8C6A-4979D80FED8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{472BA049-FEC1-4268-8C6A-4979D80FED8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1245A443-C2D8-42CA-954F-CD82481303F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1245A443-C2D8-42CA-954F-CD82481303F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1245A443-C2D8-42CA-954F-CD82481303F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1245A443-C2D8-42CA-954F-CD82481303F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F6E90C4-A7FA-4941-BB15-4A20731039AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F6E90C4-A7FA-4941-BB15-4A20731039AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F6E90C4-A7FA-4941-BB15-4A20731039AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F6E90C4-A7FA-4941-BB15-4A20731039AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6047BD11-239E-4326-8BA0-651EC8E36B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6047BD11-239E-4326-8BA0-651EC8E36B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6047BD11-239E-4326-8BA0-651EC8E36B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6047BD11-239E-4326-8BA0-651EC8E36B7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
