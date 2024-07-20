@@ -47,7 +47,7 @@ namespace CVA.api.Controllers
             return await _patientService.GetPatientById(id);
         }
         
-        [HttpPost("Filtro")]
+        [HttpPost("Filter")]
         public async Task<List<PatientDTO>> ListPatients(PatientFilter? patientFilter)
         {
             return await _patientService.ListPatients(patientFilter);

@@ -47,7 +47,7 @@ namespace CVA.api.Controllers
             return await _appointmentService.GetAppointmentLimit(appointmentLimit);
         }
         
-        [HttpPost("Filtro")]
+        [HttpPost("Filter")]
         public async Task<List<AppointmentDTO>> ListAppointments([FromBody] AppointmentFilter appointmentFilter)
         {
             return await _appointmentService.ListAppointments(appointmentFilter);
