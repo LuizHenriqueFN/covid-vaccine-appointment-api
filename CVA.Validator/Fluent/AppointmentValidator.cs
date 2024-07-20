@@ -33,11 +33,7 @@ namespace CVA.Validator.Fluent
 
         private static bool BeValidTime(string appointmentTime)
         {
-            if (TimeSpan.TryParse(appointmentTime, out TimeSpan parsedTime))
-            {
-                return parsedTime > DateTime.Now.TimeOfDay;
-            }
-            return false;
+            return TimeSpan.TryParse(appointmentTime, out _);
         }
     }
 }
