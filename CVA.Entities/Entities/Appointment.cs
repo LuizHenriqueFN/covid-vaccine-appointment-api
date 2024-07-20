@@ -2,9 +2,9 @@
 {
     public class Appointment: EntityId<int>
     {
-        public DateOnly AppointmentDate { get; set; }
+        public DateTime AppointmentDate { get; set; }
 
-        public TimeOnly AppointmentTime { get; set; }
+        public TimeSpan AppointmentTime { get; set; }
 
         public string StatusDescription { get; set; } = string.Empty;
 

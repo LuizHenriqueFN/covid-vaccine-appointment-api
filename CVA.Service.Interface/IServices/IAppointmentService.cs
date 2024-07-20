@@ -13,5 +13,7 @@ namespace CVA.Service.Interface.IServices
         Task<AppointmentDTO> DeleteAppointment(int id);
 
         Task<List<AppointmentDTO>> ListAppointments(AppointmentFilter appointmentFilter);
+
+        Task<AppointmentLimit> GetAppointmentLimit(AppointmentLimit appointmentLimit);
     }
 }

@@ -1,4 +1,5 @@
-﻿using CVA.Repository;
+﻿using CVA.api.Middleware;
+using CVA.Repository;
 using CVA.Repository.Interface;
 using CVA.Repository.Interface.IRepositories;
 using CVA.Repository.Repositories;
@@ -13,6 +14,7 @@ namespace CVA.api.Configuration
         {
             InjectRepository(services);
             InjectService(services);
+            InjectMiddleware(services);
 
             services.AddScoped<ITransactionManager, TransactionManager>();
         }
@@ -29,6 +31,9 @@ namespace CVA.api.Configuration
             services.AddScoped<IAppointmentService, AppointmentService>();
         }
 
-
+        private static void InjectMiddleware(IServiceCollection services)
+        {
+            services.AddTransient<ApiMiddleware>();
+        }
     }
 }

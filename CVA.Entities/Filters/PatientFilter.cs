@@ -1,4 +1,6 @@
-﻿namespace CVA.Entity.Filters
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CVA.Entity.Filters
 {
     public class PatientFilter
     {
@@ -6,6 +8,7 @@
 
         public string? Name { get; set; }
 
-        public DateOnly? BirthDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? BirthDate { get; set; }
     }
 }

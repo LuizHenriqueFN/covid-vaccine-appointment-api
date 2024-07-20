@@ -11,5 +11,7 @@ namespace CVA.Repository.Interface.IRepositories
         Task<List<PatientDTO>> GetAllPatients(bool asNoTracking = true);
 
         Task<List<PatientDTO>> GetPatientByFilter(PatientFilter filter, bool asNoTracking = true);
+
+        Task<PatientDTO?> GetPatientDTOById(int patientId, bool asNoTracking = true);
     }
 }

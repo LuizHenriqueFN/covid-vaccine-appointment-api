@@ -1,4 +1,5 @@
-﻿using CVA.Entity.Model;
+﻿using CVA.Entity.DTOs;
+using CVA.Entity.Model;
 using CVA.Utils.Messages;
 using FluentValidation;
 
@@ -11,29 +12,32 @@ namespace CVA.Validator.Fluent
             RuleFor(a => a.AppointmentDate)
                 .NotEmpty().WithMessage(string.Format(BusinessMessages.FieldRequired, "Appointment Date"))
                 .Must(BeValidDate).WithMessage(string.Format(BusinessMessages.InvalidField, "Appointment Date"));
-            
+
             RuleFor(a => a.AppointmentTime)
                 .NotEmpty().WithMessage(string.Format(BusinessMessages.FieldRequired, "Appointment Time"))
                 .Must(BeValidTime).WithMessage(string.Format(BusinessMessages.InvalidField, "Appointment Time"));
-            
-            RuleFor(a => a.StatusDescription)
-                .NotEmpty().WithMessage(string.Format(BusinessMessages.FieldRequired, "Status"));
-            
+
             RuleFor(a => a.PatientId)
                 .NotNull().WithMessage(string.Format(BusinessMessages.FieldRequired, "Patient"));
-            
+
         }
 
-        private static bool BeValidDate(DateOnly appointmentDate)
+        private static bool BeValidDate(string appointmentDate)
         {
-            DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
-            return appointmentDate >= currentDate;
+            if (DateTime.TryParse(appointmentDate, out DateTime parsedDate))
+            {
+                return parsedDate.Date > DateTime.Now.Date;
+            }
+            return false;
         }
 
-        private static bool BeValidTime(TimeOnly appointmentTime)
+        private static bool BeValidTime(string appointmentTime)
         {
-            TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
-            return appointmentTime > currentTime;
+            if (TimeSpan.TryParse(appointmentTime, out TimeSpan parsedTime))
+            {
+                return parsedTime > DateTime.Now.TimeOfDay;
+            }
+            return false;
         }
     }
 }

@@ -1,26 +1,29 @@
---create database CVA;
+-- Criação do banco de dados
+CREATE DATABASE CVA;
+GO
 
---use CVA;
+-- Seleção do banco de dados
+USE CVA;
+GO
 
-create table dbo.tb_paciente (
- id_paciente int identity,
- dsc_nome varchar(max) not null,
- dat_nascimento datetime not null,
- dat_criacao datetime not null,
- constraint PK_TB_PACIENTE primary key (id_paciente)
+-- Criação da tabela tb_paciente
+CREATE TABLE dbo.tb_paciente (
+    id_paciente INT IDENTITY PRIMARY KEY,
+    dsc_nome VARCHAR(MAX) NOT NULL,
+    dat_nascimento DATETIME NOT NULL,
+    dat_criacao DATETIME NOT NULL
 );
+GO
 
-create table dbo.tb_agendamento (
- id_agendamento int not null,
- id_paciente int not null,
- dat_agendamento date not null,
- hor_agendamento time not null,
- dsc_status varchar(50) not null,
- dat_criacao datetime not null,
- constraint PK_TB_AGENDAMENTO primary key (id_agendamento)
+-- Criação da tabela tb_agendamento
+CREATE TABLE dbo.tb_agendamento (
+    id_agendamento INT IDENTITY PRIMARY KEY,
+    id_paciente INT NOT NULL,
+    dat_agendamento DATE NOT NULL,
+    hor_agendamento TIME NOT NULL,
+    dsc_status VARCHAR(50) NOT NULL,
+    dat_criacao DATETIME NOT NULL,
+    CONSTRAINT FK_Agendamento_Paciente FOREIGN KEY (id_paciente)
+    REFERENCES dbo.tb_paciente (id_paciente)
 );
-
-alter table dbo.tb_agendamento
- add constraint fk_agendamento_paciente foreign key
-(id_paciente)
- references dbo.tb_paciente (id_paciente);
+GO

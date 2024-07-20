@@ -21,15 +21,36 @@ namespace CVA.Repository.Repositories
             return query.FirstOrDefaultAsync(p => p.Id == patientId);
         }
 
+        public Task<PatientDTO?> GetPatientDTOById(int patientId, bool asNoTracking = true)
+        {
+            var query = EntitySet.AsQueryable();
+
+            if (asNoTracking)
+                query = query.AsNoTracking();
+
+            return query
+                .Where(p => p.Id == patientId)
+                .Select(p => new PatientDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    BirthDate = p.BirthDate,
+                })
+                .FirstOrDefaultAsync();
+        }
+
+
         public Task<List<PatientDTO>> GetAllPatients(bool asNoTracking = true)
         {
             var query = _context.Patient
                         .Select(p => new PatientDTO
                         {
+                            Id = p.Id,
                             Name = p.Name,
                             BirthDate = p.BirthDate,
                             AppointmentDTOs = p.Appointments.Select(a => new AppointmentDTO
                             {
+                                Id = a.Id,
                                 AppointmentDate = a.AppointmentDate,
                                 AppointmentTime = a.AppointmentTime,
                                 StatusDescription = a.StatusDescription
@@ -47,13 +68,14 @@ namespace CVA.Repository.Repositories
             var query = _context.Patient.AsQueryable();
 
             if (!string.IsNullOrEmpty(filter.Name))
-                query = query.Where(p => p.Name.ToLower() == filter.Name.ToLower());
+                query = query.Where(p => p.Name.ToLower().Contains(filter.Name.ToLower()));
 
             if (filter.BirthDate.HasValue)
-                query = query.Where(p => p.BirthDate == filter.BirthDate);
+                query = query.Where(p => p.BirthDate.Equals(filter.BirthDate));
 
             var patientDTOQuery = query.Select(p => new PatientDTO
             {
+                Id = p.Id,
                 Name = p.Name,
                 BirthDate = p.BirthDate,
                 AppointmentDTOs = p.Appointments.Select(a => new AppointmentDTO
