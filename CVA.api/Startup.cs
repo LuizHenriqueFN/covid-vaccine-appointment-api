@@ -1,4 +1,5 @@
 ﻿using CVA.api.Configuration;
+using CVA.api.Middleware;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
@@ -51,6 +52,8 @@ namespace CVA.api
             });
 
             app.UseRouting();
+
+            //app.UseMiddleware<ApiMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

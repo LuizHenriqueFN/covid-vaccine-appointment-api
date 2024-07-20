@@ -17,11 +17,13 @@ namespace CVA.Repository.Repositories
                         .Include(a => a.Patient)
                         .Select(a => new AppointmentDTO
                         {
+                            Id = a.Id,
                             AppointmentDate = a.AppointmentDate,
                             AppointmentTime = a.AppointmentTime,
                             StatusDescription = a.StatusDescription,
                             Patient = new PatientDTO
                             {
+                                Id = a.Patient.Id,
                                 Name = a.Patient.Name,
                                 BirthDate = a.Patient.BirthDate
                             }
@@ -70,19 +72,15 @@ namespace CVA.Repository.Repositories
 
             var appointmentDTOQuery = query.Select(a => new AppointmentDTO
             {
+                Id = a.Id,
                 AppointmentDate = a.AppointmentDate,
                 AppointmentTime = a.AppointmentTime,
                 StatusDescription = a.StatusDescription,
                 Patient = new PatientDTO
                 {
+                    Id = a.Patient.Id,
                     Name = a.Patient.Name,
-                    BirthDate = a.Patient.BirthDate,
-                    AppointmentDTOs = a.Patient.Appointments.Select(ap => new AppointmentDTO
-                    {
-                        AppointmentDate = ap.AppointmentDate,
-                        AppointmentTime = ap.AppointmentTime,
-                        StatusDescription = ap.StatusDescription
-                    }).ToList()
+                    BirthDate = a.Patient.BirthDate
                 }
             });
 

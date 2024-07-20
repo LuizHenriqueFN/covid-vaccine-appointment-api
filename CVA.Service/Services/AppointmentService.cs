@@ -33,7 +33,7 @@ namespace CVA.Service.Services
                 throw new ServiceException(string.Format(BusinessMessages.RecordNotFound, id));
             }
 
-            await _appointmentRepository.Delete(appointment);
+            await _appointmentRepository.DeleteById(appointment.Id);
             _log.InfoFormat(BusinessMessages.OperationSuccessful, "Delete");
 
             return DTO(appointment);
@@ -41,7 +41,7 @@ namespace CVA.Service.Services
 
         public async Task<AppointmentDTO> InsertAppointment(AppointmentRegistrationModel newAppointment)
         {
-            var patient = await _patientRepository.GetPatientById(newAppointment.PatientId);
+            var patient = await _patientRepository.GetPatientById(newAppointment.PatientId, false);
             if (patient == null)
             {
                 _log.InfoFormat(BusinessMessages.RecordNotFound, newAppointment.PatientId);
@@ -50,17 +50,12 @@ namespace CVA.Service.Services
 
             var appointmentFilter = new AppointmentFilter
             {
-                AppointmentDate = newAppointment.AppointmentDate,
-                AppointmentTime = newAppointment.AppointmentTime,
-                StatusDescription = newAppointment.StatusDescription,
-                PatientFilter = new PatientFilter
-                {
-                    Id = newAppointment.PatientId
-                }
+                AppointmentDate = DateTime.Parse(newAppointment.AppointmentDate),
+                AppointmentTime = TimeSpan.Parse(newAppointment.AppointmentTime),
             };
 
             var appointment = await _appointmentRepository.GetAppointmentsByFilter(appointmentFilter);
-            if (appointment != null)
+            if (appointment.Count > 2) //Máximo 2 agendamentos por horário
             {
                 _log.InfoFormat(BusinessMessages.ExistingRecord, newAppointment.AppointmentTime);
                 throw new ServiceException(string.Format(BusinessMessages.ExistingRecord, newAppointment.AppointmentTime));
@@ -68,9 +63,10 @@ namespace CVA.Service.Services
 
             var savedAppointment = new Appointment
             {
-                AppointmentDate = newAppointment.AppointmentDate,
-                AppointmentTime = newAppointment.AppointmentTime,
-                StatusDescription = newAppointment.StatusDescription,
+                AppointmentDate = DateTime.Parse(newAppointment.AppointmentDate),
+                AppointmentTime = TimeSpan.Parse(newAppointment.AppointmentTime),
+                StatusDescription = "Pendente",
+                CreationDate = DateTime.Now,
                 Patient = patient
             };
 
@@ -81,12 +77,12 @@ namespace CVA.Service.Services
             return DTO(savedAppointment);
         }
 
-        public Task<List<AppointmentDTO>> ListAppointments(AppointmentFilter appointmentFilter)
+        public async Task<List<AppointmentDTO>> ListAppointments(AppointmentFilter appointmentFilter)
         {
-            if (appointmentFilter == null)
-                return _appointmentRepository.GetAllAppointments();
-
-            return _appointmentRepository.GetAppointmentsByFilter(appointmentFilter);
+            if (appointmentFilter == null) {
+                return await _appointmentRepository.GetAllAppointments();
+            }
+            return await _appointmentRepository.GetAppointmentsByFilter(appointmentFilter);
         }
 
         public async Task<AppointmentDTO> UpdateAppointment(AppointmentRegistrationModel newAppointment, int id)
@@ -101,12 +97,12 @@ namespace CVA.Service.Services
             var appointment = await _appointmentRepository.GetAppointmentById(id, false);
             if (appointment == null)
             {
-                _log.InfoFormat(BusinessMessages.RecordNotFound, newAppointment.AppointmentTime);
-                throw new ServiceException(string.Format(BusinessMessages.RecordNotFound, newAppointment.AppointmentTime));
+                _log.InfoFormat(BusinessMessages.RecordNotFound, id);
+                throw new ServiceException(string.Format(BusinessMessages.RecordNotFound, id));
             }
 
-            appointment.AppointmentDate = newAppointment.AppointmentDate;
-            appointment.AppointmentTime = newAppointment.AppointmentTime;
+            appointment.AppointmentDate = DateTime.Parse(newAppointment.AppointmentDate);
+            appointment.AppointmentTime = TimeSpan.Parse(newAppointment.AppointmentTime);
             appointment.StatusDescription = newAppointment.StatusDescription;
             appointment.Patient = patient;
 
@@ -115,6 +111,26 @@ namespace CVA.Service.Services
             _log.InfoFormat(BusinessMessages.OperationSuccessful, "Update");
 
             return DTO(appointment);
+        }
+        
+        public async Task<AppointmentLimit> GetAppointmentLimit(AppointmentLimit appointmentLimit)
+        {
+            var appointmentFilter = new AppointmentFilter
+            {
+                AppointmentDate = DateTime.Parse(appointmentLimit.AppointmentDate),
+            };
+
+            var appointment = await _appointmentRepository.GetAppointmentsByFilter(appointmentFilter);
+
+            appointmentLimit.DayLimit = appointment.Count;
+
+            appointmentFilter.AppointmentTime = TimeSpan.Parse(appointmentLimit.AppointmentTime);
+
+            appointment = await _appointmentRepository.GetAppointmentsByFilter(appointmentFilter);
+
+            appointmentLimit.TimeLimit = appointment.Count;
+
+            return appointmentLimit;
         }
 
         private static AppointmentDTO DTO(Appointment appointment)

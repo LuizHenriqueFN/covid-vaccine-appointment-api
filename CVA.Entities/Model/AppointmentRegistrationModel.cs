@@ -2,9 +2,9 @@
 {
     public class AppointmentRegistrationModel
     {
-        public DateOnly AppointmentDate { get; set; }
+        public string AppointmentDate { get; set; } = string.Empty;
 
-        public TimeOnly AppointmentTime { get; set; }
+        public string AppointmentTime { get; set; }  = string.Empty;
 
         public string StatusDescription { get; set; } = string.Empty;
 

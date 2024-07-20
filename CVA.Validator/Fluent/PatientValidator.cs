@@ -10,16 +10,16 @@ namespace CVA.Validator.Fluent
         {
             RuleFor(p => p.Name)
                 .NotEmpty().WithMessage(string.Format(BusinessMessages.FieldRequired, "Name"))
-                .MaximumLength(255).WithMessage(string.Format(BusinessMessages.FieldMaxLength, "Name"));
+                .MaximumLength(255).WithMessage(string.Format(BusinessMessages.FieldMaxLength, "Name", 255));
 
             RuleFor(p => p.BirthDate)
                 .NotEmpty().WithMessage(string.Format(BusinessMessages.FieldRequired, "BirthDate"))
                 .Must(BeValidBirthDate).WithMessage(string.Format(BusinessMessages.InvalidField, "BirthDate"));
         }
 
-        private static bool BeValidBirthDate(DateOnly birthDate)
+        private static bool BeValidBirthDate(DateTime birthDate)
         {
-            return birthDate.Year <= DateTime.Today.Year;
+            return birthDate <= DateTime.Today;
         }
     }
 }

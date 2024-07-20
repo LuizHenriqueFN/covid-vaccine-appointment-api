@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CVA.Repository.Interface\CVA.Repository.Interface.csproj" />
     <ProjectReference Include="..\CVA.Repository\CVA.Repository.csproj" />
     <ProjectReference Include="..\CVA.Service.Interface\CVA.Service.Interface.csproj" />

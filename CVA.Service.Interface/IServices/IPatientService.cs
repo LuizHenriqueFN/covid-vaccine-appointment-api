@@ -12,6 +12,8 @@ namespace CVA.Service.Interface.IServices
 
         Task<PatientDTO> DeletePatient(int id);
 
-        Task<List<PatientDTO>> ListPatients(PatientFilter patientFilter);
+        Task<List<PatientDTO>> ListPatients(PatientFilter? patientFilter);
+
+        Task<PatientDTO?> GetPatientById(int id);
     }
 }

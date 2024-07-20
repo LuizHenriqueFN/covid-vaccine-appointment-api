@@ -40,16 +40,17 @@ namespace CVA.Service.Services
         public async Task<PatientDTO> InsertPatient(PatientRegistrationModel newPatient)
         {
             var patient = await _patientRepository.GetPatientByFilter(new PatientFilter { Name = newPatient.Name, BirthDate = newPatient.BirthDate });
-            if (patient != null)
+            if (patient.Count > 0)
             {
                 _log.InfoFormat(BusinessMessages.ExistingRecord, newPatient.Name);
                 throw new ServiceException(string.Format(BusinessMessages.ExistingRecord, newPatient.Name));
             }
 
-            var savedPatient = new Patient
+            Patient savedPatient = new Patient
             {
                 Name = newPatient.Name,
                 BirthDate = newPatient.BirthDate,
+                CreationDate = DateTime.Now
             };
 
             savedPatient = await _patientRepository.Insert(savedPatient);
@@ -59,12 +60,23 @@ namespace CVA.Service.Services
             return DTO(savedPatient);
         }
 
-        public Task<List<PatientDTO>> ListPatients(PatientFilter patientFilter)
+        public Task<List<PatientDTO>> ListPatients(PatientFilter? patientFilter)
         {
             if (patientFilter == null)
                 return _patientRepository.GetAllPatients();
 
             return _patientRepository.GetPatientByFilter(patientFilter);
+        }
+        
+        public Task<PatientDTO?> GetPatientById(int id)
+        {
+            if (id <= 0)
+            {
+                _log.InfoFormat(BusinessMessages.RecordNotFound, "Id:" + id);
+                throw new ServiceException(string.Format(BusinessMessages.RecordNotFound, "Id:" + id));
+            }
+
+            return _patientRepository.GetPatientDTOById(id);
         }
 
         public async Task<PatientDTO> UpdatePatient(PatientRegistrationModel newPatient, int id)
@@ -72,8 +84,8 @@ namespace CVA.Service.Services
             var patient = await _patientRepository.GetPatientById(id, false);
             if (patient == null)
             {
-                _log.InfoFormat(BusinessMessages.RecordNotFound, newPatient.Name);
-                throw new ServiceException(string.Format(BusinessMessages.RecordNotFound, newPatient.Name));
+                _log.InfoFormat(BusinessMessages.RecordNotFound, "Id:" + id);
+                throw new ServiceException(string.Format(BusinessMessages.RecordNotFound, "Id:" + id));
             }
 
             patient.Name = newPatient.Name;
